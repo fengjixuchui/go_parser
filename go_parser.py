@@ -10,7 +10,6 @@ __license__ = "MIT"
 __version__ = "1.0"
 __email__ = ["jiayu0x@gmail.com"]
 
-#import common, strings, pclntbl, moduledata, types_builder, itab
 import idautils, idc, idaapi
 
 import sys
@@ -24,7 +23,6 @@ idaapi.require("pclntbl")
 idaapi.require("moduledata")
 idaapi.require("types_builder")
 idaapi.require("itab")
-idaapi.require("idc")
 
 def main():
     # find and parsefirfst moduledata

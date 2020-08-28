@@ -66,10 +66,10 @@ def find_first_moduledata_addr():
 
         curr_addr = mdata_seg_addr
         while curr_addr <= idc.BADADDR:
-            if idc.Dword(idc.Dword(curr_addr) & 0xFFFFFFFF) & 0xFFFFFFFF == magic_num: # possible firstmoduledata
+            if idc.Dword(read_mem(curr_addr, read_only=True)) & 0xFFFFFFFF == magic_num: # possible firstmoduledata
                 if test_firstmoduledata(curr_addr):
                     break
-            curr_addr += 4
+            curr_addr += ADDR_SZ
         
         if curr_addr >= idc.BADADDR:
             raise Exception("Failed to find firstmoduledata address!")
@@ -239,7 +239,7 @@ class ModuleData():
             idc.MakeComm(self.start_addr + 5*ADDR_SZ, "funcs table capacity")
             idc.MakeComm(self.start_addr + 6*ADDR_SZ, "source files table addr")
             idc.MakeComm(self.start_addr + 7*ADDR_SZ, "source files number")
-            idc.MakeComm(self.start_addr + 7*ADDR_SZ, "source files table capacity")
+            idc.MakeComm(self.start_addr + 8*ADDR_SZ, "source files table capacity")
             idc.MakeComm(self.start_addr + 9*ADDR_SZ, "findfunctable addr")
             idc.MakeComm(self.start_addr + 10*ADDR_SZ, "min pc")
             idc.MakeComm(self.start_addr + 11*ADDR_SZ, "max pc")
